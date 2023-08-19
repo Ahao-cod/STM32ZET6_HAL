@@ -1,0 +1,1 @@
+stm32zet6_local\startup_stm32f103xe.o: startup_stm32f103xe.s
