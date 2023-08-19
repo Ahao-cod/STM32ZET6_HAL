@@ -21,9 +21,11 @@
 #include "tim.h"
 #include "usart.h"
 #include "gpio.h"
+#include "fsmc.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "lcd.h"
 
 /* USER CODE END Includes */
 
@@ -90,9 +92,12 @@ int main(void)
   MX_GPIO_Init();
   MX_TIM6_Init();
   MX_USART2_UART_Init();
+  MX_FSMC_Init();
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT(&htim6);
   LED_Init();
+  LCD_Init();
+  POINT_COLOR = RED;
 
   /* USER CODE END 2 */
 

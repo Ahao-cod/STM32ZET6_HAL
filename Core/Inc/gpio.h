@@ -22,37 +22,37 @@
 #define __GPIO_H__
 
 #ifdef __cplusplus
-extern "C"
-{
+extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 
-  /* USER CODE BEGIN Includes */
+/* USER CODE BEGIN Includes */
 
-  /* USER CODE END Includes */
+/* USER CODE END Includes */
 
-  /* USER CODE BEGIN Private defines */
+/* USER CODE BEGIN Private defines */
   void LED_Init(void);
   void LED_On(void);
   void LED_Trigger(void);
   void LED_Off(void);
 
-  /* USER CODE END Private defines */
+/* USER CODE END Private defines */
 
-  void MX_GPIO_Init(void);
+void MX_GPIO_Init(void);
 
-  /* USER CODE BEGIN Prototypes */
+/* USER CODE BEGIN Prototypes */
   struct KEY
   {
     unsigned int key_state;
     unsigned char key_io_state;
     unsigned char key_press_flag;
   };
-  /* USER CODE END Prototypes */
+/* USER CODE END Prototypes */
 
 #ifdef __cplusplus
 }
 #endif
 #endif /*__ GPIO_H__ */
+
