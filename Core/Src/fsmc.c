@@ -42,7 +42,7 @@ void MX_FSMC_Init(void)
   /* USER CODE END FSMC_Init 1 */
 
   /** Perform the SRAM1 memory initialization sequence
-   */
+  */
   hsram1.Instance = FSMC_NORSRAM_DEVICE;
   hsram1.Extended = FSMC_NORSRAM_EXTENDED_DEVICE;
   /* hsram1.Init */
@@ -71,18 +71,18 @@ void MX_FSMC_Init(void)
   ExtTiming.AddressSetupTime = 15;
   ExtTiming.AddressHoldTime = 15;
   ExtTiming.DataSetupTime = 255;
-  ExtTiming.BusTurnAroundDuration = 0;
+  ExtTiming.BusTurnAroundDuration = 15;
   ExtTiming.CLKDivision = 16;
   ExtTiming.DataLatency = 17;
   ExtTiming.AccessMode = FSMC_ACCESS_MODE_A;
 
   if (HAL_SRAM_Init(&hsram1, &Timing, &ExtTiming) != HAL_OK)
   {
-    Error_Handler();
+    Error_Handler( );
   }
 
   /** Disconnect NADV
-   */
+  */
 
   __HAL_AFIO_FSMCNADV_DISCONNECTED();
 
@@ -93,14 +93,12 @@ void MX_FSMC_Init(void)
 
 static uint32_t FSMC_Initialized = 0;
 
-static void HAL_FSMC_MspInit(void)
-{
+static void HAL_FSMC_MspInit(void){
   /* USER CODE BEGIN FSMC_MspInit 0 */
 
   /* USER CODE END FSMC_MspInit 0 */
   GPIO_InitTypeDef GPIO_InitStruct = {0};
-  if (FSMC_Initialized)
-  {
+  if (FSMC_Initialized) {
     return;
   }
   FSMC_Initialized = 1;
@@ -131,21 +129,25 @@ static void HAL_FSMC_MspInit(void)
   PG12   ------> FSMC_NE4
   */
   /* GPIO_InitStruct */
-  GPIO_InitStruct.Pin = GPIO_PIN_0 | GPIO_PIN_12;
+  GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_12;
   GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
 
   HAL_GPIO_Init(GPIOG, &GPIO_InitStruct);
 
   /* GPIO_InitStruct */
-  GPIO_InitStruct.Pin = GPIO_PIN_7 | GPIO_PIN_8 | GPIO_PIN_9 | GPIO_PIN_10 | GPIO_PIN_11 | GPIO_PIN_12 | GPIO_PIN_13 | GPIO_PIN_14 | GPIO_PIN_15;
+  GPIO_InitStruct.Pin = GPIO_PIN_7|GPIO_PIN_8|GPIO_PIN_9|GPIO_PIN_10
+                          |GPIO_PIN_11|GPIO_PIN_12|GPIO_PIN_13|GPIO_PIN_14
+                          |GPIO_PIN_15;
   GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
 
   HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
 
   /* GPIO_InitStruct */
-  GPIO_InitStruct.Pin = GPIO_PIN_8 | GPIO_PIN_9 | GPIO_PIN_10 | GPIO_PIN_14 | GPIO_PIN_15 | GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_4 | GPIO_PIN_5;
+  GPIO_InitStruct.Pin = GPIO_PIN_8|GPIO_PIN_9|GPIO_PIN_10|GPIO_PIN_14
+                          |GPIO_PIN_15|GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_4
+                          |GPIO_PIN_5;
   GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
 
@@ -156,8 +158,7 @@ static void HAL_FSMC_MspInit(void)
   /* USER CODE END FSMC_MspInit 1 */
 }
 
-void HAL_SRAM_MspInit(SRAM_HandleTypeDef *sramHandle)
-{
+void HAL_SRAM_MspInit(SRAM_HandleTypeDef* sramHandle){
   /* USER CODE BEGIN SRAM_MspInit 0 */
 
   /* USER CODE END SRAM_MspInit 0 */
@@ -169,13 +170,11 @@ void HAL_SRAM_MspInit(SRAM_HandleTypeDef *sramHandle)
 
 static uint32_t FSMC_DeInitialized = 0;
 
-static void HAL_FSMC_MspDeInit(void)
-{
+static void HAL_FSMC_MspDeInit(void){
   /* USER CODE BEGIN FSMC_MspDeInit 0 */
 
   /* USER CODE END FSMC_MspDeInit 0 */
-  if (FSMC_DeInitialized)
-  {
+  if (FSMC_DeInitialized) {
     return;
   }
   FSMC_DeInitialized = 1;
@@ -205,19 +204,22 @@ static void HAL_FSMC_MspDeInit(void)
   PG12   ------> FSMC_NE4
   */
 
-  HAL_GPIO_DeInit(GPIOG, GPIO_PIN_0 | GPIO_PIN_12);
+  HAL_GPIO_DeInit(GPIOG, GPIO_PIN_0|GPIO_PIN_12);
 
-  HAL_GPIO_DeInit(GPIOE, GPIO_PIN_7 | GPIO_PIN_8 | GPIO_PIN_9 | GPIO_PIN_10 | GPIO_PIN_11 | GPIO_PIN_12 | GPIO_PIN_13 | GPIO_PIN_14 | GPIO_PIN_15);
+  HAL_GPIO_DeInit(GPIOE, GPIO_PIN_7|GPIO_PIN_8|GPIO_PIN_9|GPIO_PIN_10
+                          |GPIO_PIN_11|GPIO_PIN_12|GPIO_PIN_13|GPIO_PIN_14
+                          |GPIO_PIN_15);
 
-  HAL_GPIO_DeInit(GPIOD, GPIO_PIN_8 | GPIO_PIN_9 | GPIO_PIN_10 | GPIO_PIN_14 | GPIO_PIN_15 | GPIO_PIN_0 | GPIO_PIN_1 | GPIO_PIN_4 | GPIO_PIN_5);
+  HAL_GPIO_DeInit(GPIOD, GPIO_PIN_8|GPIO_PIN_9|GPIO_PIN_10|GPIO_PIN_14
+                          |GPIO_PIN_15|GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_4
+                          |GPIO_PIN_5);
 
   /* USER CODE BEGIN FSMC_MspDeInit 1 */
 
   /* USER CODE END FSMC_MspDeInit 1 */
 }
 
-void HAL_SRAM_MspDeInit(SRAM_HandleTypeDef *sramHandle)
-{
+void HAL_SRAM_MspDeInit(SRAM_HandleTypeDef* sramHandle){
   /* USER CODE BEGIN SRAM_MspDeInit 0 */
 
   /* USER CODE END SRAM_MspDeInit 0 */
@@ -227,9 +229,9 @@ void HAL_SRAM_MspDeInit(SRAM_HandleTypeDef *sramHandle)
   /* USER CODE END SRAM_MspDeInit 1 */
 }
 /**
- * @}
- */
+  * @}
+  */
 
 /**
- * @}
- */
+  * @}
+  */

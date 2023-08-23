@@ -92,28 +92,28 @@ void MX_GPIO_Init(void)
 /* USER CODE BEGIN 2 */
 void LED_Init()
 {
-  // LED初始化高电平
+  // LEDInit Low
   HAL_GPIO_WritePin(GPIOE, GPIO_PIN_5, GPIO_PIN_SET);
   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, GPIO_PIN_SET);
 }
 
 void LED_On()
 {
-  // LED�?
+  // LEDOn
   HAL_GPIO_WritePin(GPIOE, GPIO_PIN_5, GPIO_PIN_RESET);
   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, GPIO_PIN_RESET);
 }
 
 void LED_Trigger()
 {
-  // LED闪烁
+  // LEDToggle
   HAL_GPIO_TogglePin(GPIOE, GPIO_PIN_5);
   HAL_GPIO_TogglePin(GPIOB, GPIO_PIN_5);
 }
 
 void LED_Off()
 {
-  // LED�?
+  // LEDOff
   HAL_GPIO_WritePin(GPIOE, GPIO_PIN_5, GPIO_PIN_SET);
   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_5, GPIO_PIN_SET);
 }
