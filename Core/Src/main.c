@@ -18,6 +18,8 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "dac.h"
+#include "dma.h"
 #include "tim.h"
 #include "usart.h"
 #include "gpio.h"
@@ -26,6 +28,8 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "lcd.h"
+#include "stdint.h"
+#include "string.h"
 
 /* USER CODE END Includes */
 
@@ -87,23 +91,29 @@ int main(void)
   SystemClock_Config();
 
   /* USER CODE BEGIN SysInit */
+  // 打开所有中断
+  __set_PRIMASK(0);
 
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_DMA_Init();
   MX_TIM6_Init();
   MX_USART2_UART_Init();
   MX_FSMC_Init();
   MX_TIM1_Init();
+  MX_DAC_Init();
+  MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT(&htim6);
-  HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_4);
+  // HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_4);
   LED_Init();
   LCD_Init();
 
-  __HAL_TIM_SetCompare(&htim1, TIM_CHANNEL_4, 0);
+  // __HAL_TIM_SetCompare(&htim1, TIM_CHANNEL_4, 0);
   POINT_COLOR = RED;
+  HAL_UART_Transmit(&huart1, (uint8_t *)"app ok\r\n", (uint16_t)strlen("app ok\r\n"), 0xf);
 
   /* USER CODE END 2 */
 
@@ -111,7 +121,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    App_PWM_Control();
+    // App_PWM_Control();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -165,7 +175,7 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
     TimeCounter++;
     if (TimeCounter == 5)
     {
-      // ???????????????????
+      // 定时器检测按键
       TimeCounter = 0;
       key[0].key_io_state = HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_2);
       key[1].key_io_state = HAL_GPIO_ReadPin(GPIOE, GPIO_PIN_3);

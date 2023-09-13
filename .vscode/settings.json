@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "stdlib.h": "c",
+        "main.h": "c"
+    }
+    "editor.formatOnType": true,
+    "editor.formatOnSave": true,
+    "editor.cursorBlinking": "smooth",
+    "files.autoGuessEncoding": true,
+}
